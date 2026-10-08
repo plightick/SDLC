@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <rect width="980" height="620" fill="#ffffff"/>
+  <text x="490" y="28" text-anchor="middle" font-size="16" font-weight="700"> 8AC=>: 3.3  803@0<<0 :;0AA>2 CB8;8BK «KA>B0 8 4;8=0»</text>
+
+  <!-- LengthUnit -->
+  <g>
+    <rect x="40" y="60" width="220" height="210" rx="4" fill="#fff8e1" stroke="#333"/>
+    <rect x="40" y="60" width="220" height="28" fill="#ffe082" stroke="#333"/>
+    <text x="150" y="79" text-anchor="middle" font-style="italic">&lt;&lt;enumeration&gt;&gt; LengthUnit</text>
+    <text x="52" y="108">INCH</text>
+    <text x="52" y="126">YARD</text>
+    <text x="52" y="144">CENTIMETER</text>
+    <text x="52" y="162">METER</text>
+    <text x="52" y="180">AMERICAN_COCKROACH</text>
+    <text x="52" y="198">GIRAFFE_NECK</text>
+    <text x="52" y="216">LONGEST_SNAKE</text>
+    <text x="52" y="234">HUMAN_TONGUE</text>
+    <text x="52" y="252">FOOTBALL_FIELD</text>
+  </g>
+
+  <!-- LengthModel -->
+  <g>
+    <rect x="300" y="60" width="260" height="230" rx="4" fill="#e3f2fd" stroke="#333"/>
+    <rect x="300" y="60" width="260" height="28" fill="#90caf9" stroke="#333"/>
+    <text x="430" y="79" text-anchor="middle" font-weight="700">LengthModel</text>
+    <line x1="300" y1="88" x2="560" y2="88" stroke="#333"/>
+    <text x="312" y="110">- lengthValue : double</text>
+    <text x="312" y="128">- fromUnit : LengthUnit</text>
+    <text x="312" y="146">- toUnit : LengthUnit</text>
+    <text x="312" y="164">- result : double</text>
+    <text x="312" y="182">- listeners : List</text>
+    <line x1="300" y1="192" x2="560" y2="192" stroke="#333"/>
+    <text x="312" y="214">+ addListener()</text>
+    <text x="312" y="232">+ setData()</text>
+    <text x="312" y="250">+ getFormattedConversion()</text>
+    <text x="312" y="268">- notifyListeners()</text>
+  </g>
+
+  <!-- ModelListener -->
+  <g>
+    <rect x="610" y="60" width="230" height="90" rx="4" fill="#f3e5f5" stroke="#333"/>
+    <rect x="610" y="60" width="230" height="28" fill="#ce93d8" stroke="#333"/>
+    <text x="725" y="79" text-anchor="middle" font-style="italic">&lt;&lt;interface&gt;&gt; ModelListener</text>
+    <text x="622" y="118">+ onModelChanged()</text>
+  </g>
+
+  <!-- MainView -->
+  <g>
+    <rect x="610" y="190" width="230" height="130" rx="4" fill="#e8f5e9" stroke="#333"/>
+    <rect x="610" y="190" width="230" height="28" fill="#a5d6a7" stroke="#333"/>
+    <text x="725" y="209" text-anchor="middle" font-weight="700">MainView</text>
+    <text x="622" y="236">- lblConversion : JLabel</text>
+    <line x1="610" y1="246" x2="840" y2="246" stroke="#333"/>
+    <text x="622" y="268">+ onModelChanged()</text>
+    <text x="622" y="286">- initView()</text>
+  </g>
+
+  <!-- InputDialog -->
+  <g>
+    <rect x="610" y="360" width="230" height="130" rx="4" fill="#e8f5e9" stroke="#333"/>
+    <rect x="610" y="360" width="230" height="28" fill="#a5d6a7" stroke="#333"/>
+    <text x="725" y="379" text-anchor="middle" font-weight="700">InputDialog</text>
+    <text x="622" y="406">- txtLength : JTextField</text>
+    <text x="622" y="424">- cmbFrom, cmbTo</text>
+    <line x1="610" y1="434" x2="840" y2="434" stroke="#333"/>
+    <text x="622" y="456">+ setValues()</text>
+  </g>
+
+  <!-- LengthController -->
+  <g>
+    <rect x="300" y="360" width="260" height="130" rx="4" fill="#ffebee" stroke="#333"/>
+    <rect x="300" y="360" width="260" height="28" fill="#ef9a9a" stroke="#333"/>
+    <text x="430" y="379" text-anchor="middle" font-weight="700">LengthController</text>
+    <text x="312" y="406">- model : LengthModel</text>
+    <text x="312" y="424">- inputDialog : InputDialog</text>
+    <line x1="300" y1="434" x2="560" y2="434" stroke="#333"/>
+    <text x="312" y="456">+ openInputDialog()</text>
+    <text x="312" y="474">+ processInput()</text>
+  </g>
+
+  <!-- Main -->
+  <g>
+    <rect x="40" y="360" width="220" height="90" rx="4" fill="#eceff1" stroke="#333"/>
+    <rect x="40" y="360" width="220" height="28" fill="#b0bec5" stroke="#333"/>
+    <text x="150" y="379" text-anchor="middle" font-weight="700">Main</text>
+    <text x="52" y="416">+ main(args : String[])</text>
+  </g>
+
+  <!-- relations -->
+  <line x1="300" y1="150" x2="260" y2="150" stroke="#333"/>
+  <polygon points="260,150 272,144 272,156" fill="#333"/>
+  <text x="268" y="142" font-size="11">uses</text>
+
+  <line x1="560" y1="105" x2="610" y2="105" stroke="#333"/>
+  <text x="568" y="98" font-size="11">notifies</text>
+
+  <line x1="725" y1="190" x2="725" y2="150" stroke="#333"/>
+  <polygon points="725,150 719,162 731,162" fill="none" stroke="#333"/>
+  <text x="735" y="174" font-size="11">implements</text>
+
+  <line x1="610" y1="255" x2="560" y2="160" stroke="#333"/>
+  <line x1="430" y1="290" x2="430" y2="360" stroke="#333"/>
+  <line x1="560" y1="425" x2="610" y2="425" stroke="#333"/>
+  <text x="565" y="416" font-size="11">creates</text>
+
+  <text x="40" y="530" font-size="12">:B82=0O <>45;L: LengthModel ’ ModelListener.onModelChanged() ’ MainView</text>
+  <text x="40" y="550" font-size="12">>=B@>;;5@ ?5@540QB 22>4 87 InputDialog 2 LengthModel.setData()</text>
+  <text x="40" y="590" font-size="12" fill="#555">AE>4=8: PlantUML: docs/mvc.puml  (2 VS Code: @0AH8@5=85 PlantUML ’ Preview)</text>
+</svg>

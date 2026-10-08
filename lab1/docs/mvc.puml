@@ -1,0 +1,90 @@
+@startuml
+title Утилита «Высота и длина» — диаграмма классов MVC
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "Model" {
+    enum LengthUnit {
+        INCH
+        YARD
+        CENTIMETER
+        METER
+        AMERICAN_COCKROACH
+        GIRAFFE_NECK
+        LONGEST_SNAKE
+        HUMAN_TONGUE
+        FOOTBALL_FIELD
+        --
+        displayName : String
+        metersPerUnit : double
+        --
+        formatWithValue(value : double) : String
+        getMetersPerUnit() : double
+    }
+
+    interface ModelListener {
+        onModelChanged()
+    }
+
+    class LengthModel {
+        - lengthValue : double
+        - fromUnit : LengthUnit
+        - toUnit : LengthUnit
+        - result : double
+        - listeners : List
+        --
+        + addListener(listener : ModelListener)
+        + setData(length, from, to)
+        + getFormattedConversion() : String
+        - convert() : double
+        - notifyListeners()
+    }
+}
+
+package "View" {
+    class MainView {
+        - controller : LengthController
+        - model : LengthModel
+        - lblConversion : JLabel
+        --
+        + onModelChanged()
+        - initView()
+    }
+
+    class InputDialog {
+        - txtLength : JTextField
+        - cmbFrom : JComboBox
+        - cmbTo : JComboBox
+        --
+        + setValues(...)
+    }
+}
+
+package "Controller" {
+    class LengthController {
+        - model : LengthModel
+        - inputDialog : InputDialog
+        --
+        + openInputDialog(parent : JFrame)
+        + processInput(length, from, to)
+    }
+}
+
+class Main {
+    + main(args : String[])
+}
+
+LengthModel ..> LengthUnit
+LengthModel o--> ModelListener
+MainView ..|> ModelListener
+MainView --> LengthController
+MainView --> LengthModel
+InputDialog --> LengthController
+LengthController --> LengthModel
+LengthController --> InputDialog
+Main --> LengthModel
+Main --> LengthController
+Main --> MainView
+
+@enduml

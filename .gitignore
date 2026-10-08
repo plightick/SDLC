@@ -29,3 +29,6 @@ Thumbs.db
 *.log
 *.tmp
 *.bak
+
+# Скомпилированные вспомогательные бинарники
+lab1/scripts/java-nosnap

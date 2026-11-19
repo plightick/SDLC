@@ -1,0 +1,15 @@
+digraph G {
+  rankdir=TB; nodesep=0.3; ranksep=0.55;
+  node [fontname="Helvetica", fontsize=14, color="#334155", penwidth=1.2, shape=box, style="rounded,filled"];
+  edge [color="#334155", fontname="Helvetica", fontsize=13];
+  U [label="Студент\n[пользователь]\nЗагружает, ищет,\nскачивает материалы", fillcolor="#e2e8f0"];
+  MD [label="Модератор\n[пользователь]\nПроверяет материалы\nи жалобы", fillcolor="#e2e8f0"];
+  AD [label="Администратор\n[пользователь]\nВедёт справочники\nи учётные записи", fillcolor="#e2e8f0"];
+  S [label="StudyShare\n[система]\nВеб-приложение обмена конспектами:\nкаталог, поиск, модерация", fillcolor="#bfdbfe"];
+  M [label="SMTP-сервер\n[внешняя система]\nДоставка уведомлений", fillcolor="#f1f5f9"];
+  { rank=same; U; MD; AD; }
+  U -> S [label=" HTTPS"];
+  MD -> S [label=" HTTPS"];
+  AD -> S [label=" HTTPS"];
+  S -> M [label=" письма (SMTP)"];
+}

@@ -1,0 +1,11 @@
+digraph G {
+  rankdir=TB; nodesep=0.3; ranksep=0.45;
+  node [fontname="Helvetica", fontsize=14, shape=box, style="rounded,filled", fillcolor="#f1f5f9", color="#334155"];
+  edge [color="#334155", fontname="Helvetica", fontsize=13];
+  start [shape=circle, label="", width=0.25, style=filled, fillcolor="#334155"];
+  dr [label="Черновик"]; mod [label="На модерации"]; pub [label="Опубликован", fillcolor="#bbf7d0", peripheries=2]; rej [label="Отклонён", fillcolor="#fecaca"]; hid [label="Скрыт", fillcolor="#fef9c3"]; del [label="Удалён", fillcolor="#e2e8f0"];
+  start -> dr [label=" загрузка"];
+  dr -> mod [label=" отправка"]; mod -> pub [label=" решение модератора"]; mod -> rej [label=" с причиной"];
+  rej -> mod [label=" после правки"]; pub -> hid [label=" жалоба принята"]; hid -> pub [label=" восстановление"];
+  dr -> del; rej -> del; pub -> del; hid -> del;
+}

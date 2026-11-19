@@ -1,0 +1,22 @@
+digraph G {
+  rankdir=TB; nodesep=0.35; ranksep=0.55; compound=true;
+  node [fontname="Helvetica", fontsize=14, shape=box, style="rounded,filled", fillcolor="#f1f5f9", color="#334155"];
+  edge [color="#334155", fontname="Helvetica", fontsize=13];
+  BR [label="Браузер\n(Chrome, Firefox, Safari, Edge)", fillcolor="#e2e8f0"];
+  subgraph cluster_host { label="Сервер (Linux, 2 vCPU, 2 ГБ),\nDocker Compose"; labelloc=b; fontname="Helvetica-Bold"; fontsize=14; style="rounded,filled"; fillcolor="#eff6ff"; color="#334155";
+    PX [label="proxy\nCaddy: HTTPS,\nсертификат TLS"];
+    AP [label="app\nJRE 21 + Spring Boot\n+ LibreOffice, порт 8080", fillcolor="#bfdbfe"];
+    PG [label="db\nPostgreSQL 16", shape=cylinder, fillcolor="#bfdbfe"];
+    VL [label="volume\npgdata", shape=folder];
+    FV [label="volume\nfiles (материалы,\nпревью)", shape=folder];
+    BK [label="backup\npg_dump и архив files\nежедневно, 7 копий"];
+    BV [label="volume\nbackups", shape=folder];
+  }
+  SM [label="SMTP-сервер\n(внешний)", fillcolor="#e2e8f0"];
+  BR -> PX [label=" HTTPS :443"];
+  PX -> AP [label=" HTTP :8080"];
+  AP -> PG [label=" JDBC :5432"];
+  AP -> FV [label=" файлы"];
+  PG -> VL; BK -> PG [label=" pg_dump"]; BK -> FV [label=" архив"]; BK -> BV;
+  AP -> SM [label=" SMTP"];
+}

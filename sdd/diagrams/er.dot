@@ -1,0 +1,17 @@
+digraph G {
+  rankdir=TB; nodesep=0.2; ranksep=0.3;
+  node [shape=plain, fontname="Helvetica", fontsize=14];
+  edge [color="#334155", fontname="Helvetica", fontsize=13, arrowhead=crow, dir=both, arrowtail=tee];
+  users [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#e2e8f0"><b>users</b></td></tr><hr/><tr><td align="left">PK id, email,<br align="left"/>password_hash, role,<br align="left"/>failed_logins,<br align="left"/>locked_until<br align="left"/></td></tr></table>>];
+  refs [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#e2e8f0"><b>subjects, teachers,<br/>semesters, tags</b></td></tr><hr/><tr><td align="left">PK id, name;<br align="left"/>material_tags<br align="left"/>(material_id, tag_id)<br align="left"/></td></tr></table>>];
+  materials [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#e2e8f0"><b>materials</b></td></tr><hr/><tr><td align="left">PK id, FK author_id, FK subject_id,<br align="left"/>FK teacher_id, FK semester_id,<br align="left"/>title, type, description, status,<br align="left"/>reject_reason, file_path, file_hash,<br align="left"/>downloads, search_vector<br align="left"/></td></tr></table>>];
+  ratings [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#bbf7d0"><b>ratings</b></td></tr><hr/><tr><td align="left">PK (user_id,<br align="left"/>material_id),<br align="left"/>score 1–5<br align="left"/></td></tr></table>>];
+  comments [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#bbf7d0"><b>comments</b></td></tr><hr/><tr><td align="left">PK id,<br align="left"/>FK material_id,<br align="left"/>FK user_id,<br align="left"/>FK parent_id,<br align="left"/>text, hidden,<br align="left"/>is_question<br align="left"/></td></tr></table>>];
+  history [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#e2e8f0"><b>status_changes</b></td></tr><hr/><tr><td align="left">PK id,<br align="left"/>FK material_id,<br align="left"/>FK moderator_id,<br align="left"/>from_status,<br align="left"/>to_status,<br align="left"/>reason, changed_at<br align="left"/></td></tr></table>>];
+  downloads [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#e2e8f0"><b>download_log</b></td></tr><hr/><tr><td align="left">PK id,<br align="left"/>FK user_id,<br align="left"/>FK material_id,<br align="left"/>downloaded_at<br align="left"/></td></tr></table>>];
+  complaints [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" color="#334155"><tr><td bgcolor="#bbf7d0"><b>complaints</b></td></tr><hr/><tr><td align="left">PK id, FK user_id,<br align="left"/>object_type, object_id,<br align="left"/>reason, status<br align="left"/></td></tr></table>>];
+  { rank=same; users; refs; complaints; }
+  { rank=same; ratings; comments; history; downloads; }
+  users -> materials; refs -> materials; users -> complaints [constraint=false];
+  materials -> ratings; materials -> comments; materials -> history; materials -> downloads;
+}

@@ -1,0 +1,22 @@
+digraph G {
+  rankdir=TB; nodesep=0.35; ranksep=0.45;
+  node [fontname="Helvetica", fontsize=14, shape=box, style="rounded,filled", fillcolor="#f1f5f9", color="#334155"];
+  edge [color="#334155", fontname="Helvetica", fontsize=13];
+  B [label="Браузер пользователя", fillcolor="#e2e8f0"];
+  W [label="Веб-слой (controller)\nSpring Security: сеансы,\nроли, CSRF; шаблоны\nThymeleaf", fillcolor="#dbeafe"];
+  S [label="Слой сервисов (service)\nMaterialService, StatusPolicy,\nSearchService, FileInspector,\nPreviewService, MailService,\nTextExtractionJob", fillcolor="#dbeafe"];
+  R [label="Слой доступа к данным\n(repository), Spring Data JPA", fillcolor="#dbeafe"];
+  DB [label="PostgreSQL\n(Flyway, полнотекстовый\nиндекс)", shape=cylinder, fillcolor="#bfdbfe"];
+  FS [label="Файлы\n(том Docker)", shape=folder, fillcolor="#bfdbfe"];
+  SM [label="SMTP-сервер", fillcolor="#e2e8f0"];
+  LO [label="LibreOffice\n(процесс)", fillcolor="#e2e8f0"];
+  B -> W [label=" HTTPS"];
+  W -> S [label=" сервисы"];
+  S -> R [label=" репозитории"];
+  R -> DB [label=" JDBC"];
+  S -> FS [label=" файлы"];
+  S -> SM [label=" SMTP"];
+  S -> LO [label=" в PDF"];
+  { rank=same; R; FS; }
+  { rank=same; DB; SM; LO; }
+}
